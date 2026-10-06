@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<audio id="click-magic" preload="auto">
+        <source src="https://socrarius-tool.com/launcher/magic21.mp3" type="audio/mp3">
+    </audio>
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photoshop Manual Series</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #eeeeee;
+        }
+
+
+ /* ✨ 変更：バナー用のラッパー（画像がはみ出さないように中央に包む） */
+        .banner-container {
+            width: 100%;
+            background-color: #000000; /* 画像の背景を黒にして馴染ませる */
+            text-align: center;       /* 画像を中央揃えにする */
+        }
+
+        /* ✨ 変更：最上部の画像（固定せず、画面幅に合わせて伸縮するだけ） */
+        .top-banner-img {
+            display: block;
+            width: 100%;         /* 画面の横幅いっぱいに広げる */
+            max-width: 900px;    /* テーブルの最大幅と合わせて一体感を出す */
+            height: auto;        /* 縦横比を崩さずに拡大縮小 */
+            margin: 0 auto;      /* 中央揃え */
+        }
+
+        /* --- 🌸 ヘッダー（黒バー＋ナビ）だけを固定！ --- */
+        .fixed-header {
+            position: fixed;
+            /* 💡 魔法のポイント：top: 0 ではなく、初期状態は通常配置、スクロール時に上部に張り付くように設定！ */
+            position: -webkit-sticky; /* サファリ用 */
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999; /* 重なり順を一番上に */
+            background-color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+        }
+
+        /* 相互リンクバー（ナビゲーション） */
+        .nav-bar {
+            background-color: #000000; /* 真っ黒で引き締める */
+            display: flex;
+            justify-content: flex-end; /* 右寄せ（イメージ図通り） */
+            padding: 10px 20px;
+            border-bottom: 2px solid #008eb6; /* フォトショカラーのアクセント */
+        }
+
+        .nav-bar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 5px 15px;
+            border-right: 1px solid #444; /* 区切り線 */
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+        .nav-bar a:last-child {
+            border-right: none;
+        }
+
+        .nav-bar a:hover {
+            background-color: #333;
+            color: #00a8ff;
+        }
+
+        /* --- コンテンツエリア（余白を多めに！） --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            /* バナー(180px) + ナビ(約45px) + 余裕分で250px確保 */
+            padding: 20px 20px 40px;
+        }
+
+        .title-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 5px;
+            border-left: 5px solid #008eb6;
+            padding: 5px 0 5px 15px;
+        }
+
+        .title-area h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        /* --- テーブルデザイン（共通） --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #2b2b2b;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #3d3d3d;    /* ★薄いグレーの区切り線 */
+            border-right: 1px solid #3d3d3d; /* 横線と同じ落ち着いたグレー */
+        }
+
+        th {
+            background-color: #008eb6;
+            color: white;
+        }
+
+        /* 画像用クラス（シェイプページで使用） */
+        .preview-img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        /* タイトルバナー（高さ65px） */
+        .title-banner {
+            background-color: #000000;
+            height: 65px; 
+            box-sizing: border-box;
+            padding: 15px 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .title-banner h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #00a8ff;
+            border-left: 5px solid #008eb6;
+            padding-left: 15px;
+            line-height: 1.2;
+        }
+
+        /* 🌸 セクションタイトル（追加） */
+        .section-title {
+            background: #000;
+            color: #00f2fe;
+            padding: 8px 15px;
+            margin: 15px 0 15px 0;
+            font-size: 14px;
+            font-weight: bold;
+            border-left: 4px solid #00f2fe;
+            letter-spacing: 2px;
+            box-shadow: inset 0 0 10px rgba(0, 242, 254, 0.2);
+        }
+
+                /* 🌸 セクションタイトル（追加） */
+        .section-title-second {
+            background: #000;
+            color: #00f2fe;
+            padding: 8px 15px;
+            margin: 15px 0 -5px 0;
+            font-size: 14px;
+            font-weight: bold;
+            border-left: 4px solid #00f2fe;
+            letter-spacing: 2px;
+            box-shadow: inset 0 0 10px rgba(0, 242, 254, 0.2);
+        }
+
+        /* 🌸 解説画像を入れる専用枠BOX */
+        .img-box {
+            display: inline-block;
+            border: 1px solid #008eb6;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 168, 255, 0.25);
+            background-color: #000000;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            margin-left: 1.5em;
+            overflow: hidden;
+        }
+
+        .img-box img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="banner-container">
+        <img src="https://socrarius-tool.com/PhotoshopTechniques/banner1.jpg" alt="socrarius" class="top-banner-img">
+    </div>
+
+    <div class="fixed-header">
+        <div class="title-banner">
+            <h1>Photoshop Techniques</h1>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Shape Name</th>
+                    <th style="width: 70%;">Preview</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td colspan="2" style="padding: 0;">
+                   <div class="section-title">従来のシェイプ</div>
+                </td>
+            </tr>               
+                <tr>
+                    <td>デフォルトシェイプ</td>
+                    <td><img src="shape1.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>動物</td>
+                    <td><img src="shape2.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>矢印</td>
+                    <td><img src="shape3.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>アーティスティックテクスチャ</td>
+                    <td><img src="shape4.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>バナーと賞</td>
+                    <td><img src="shape5.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>フィルム</td>
+                    <td><img src="shape6.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>フレーム</td>
+                    <td><img src="shape7.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>液状のシミ</td>
+                    <td><img src="shape8.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>電球</td>
+                    <td><img src="shape9.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>音楽</td>
+                    <td><img src="shape10.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                 <tr>
+                    <td>自然</td>
+                    <td><img src="shape11.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>オブジェクト</td>
+                    <td><img src="shape12.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>装飾</td>
+                    <td><img src="shape13.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>図形</td>
+                    <td><img src="shape14.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                  <tr>
+                    <td>記号</td>
+                    <td><img src="shape15.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>吹き出し</td>
+                    <td><img src="shape16.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>タイルし</td>
+                    <td><img src="shape17.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>Web</td>
+                    <td><img src="shape18.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+
+            <tr>
+                <td colspan="2" style="padding: 0;">
+                   <div class="section-title">2019シェイプ</div>
+                </td>
+            </tr>
+
+                <tr>
+                    <td>針葉樹</td>
+                    <td><img src="shape19.png" alt="吹き出し" class="preview-img"></td>
+                </tr> 
+                <tr>
+                    <td>葉のない木</td>
+                    <td><img src="shape20.png" alt="吹き出し" class="preview-img"></td>
+                </tr> 
+                <tr>
+                    <td>森林と山</td>
+                    <td><img src="shape21.png" alt="吹き出し" class="preview-img"></td>
+                </tr> 
+                <tr>
+                    <td>湖と丘</td>
+                    <td><img src="shape22.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>葉</td>
+                    <td><img src="shape23.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>サボテン</td>
+                    <td><img src="shape24.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>道路と小川</td>
+                    <td><img src="shape25.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>スパイラル形状</td>
+                    <td><img src="shape26.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>人物</td>
+                    <td><img src="shape27.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>顔文字</td>
+                    <td><img src="shape28.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>ランドマーク</td>
+                    <td><img src="shape29.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>都市</td>
+                    <td><img src="shape30.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>建物</td>
+                    <td><img src="shape31.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>飛行機</td>
+                    <td><img src="shape32.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>車両1</td>
+                    <td><img src="shape33.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>車両2</td>
+                    <td><img src="shape34.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>家畜</td>
+                    <td><img src="shape35.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>水生動物</td>
+                    <td><img src="shape36.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>飛翔動物</td>
+                    <td><img src="shape37.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>昆虫とクモ類</td>
+                    <td><img src="shape38.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>両生類と爬虫類</td>
+                    <td><img src="shape39.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>海洋生物</td>
+                    <td><img src="shape40.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>恐竜</td>
+                    <td><img src="shape41.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>スポーツ用品</td>
+                    <td><img src="shape42.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>チェスとチェッカー</td>
+                    <td><img src="shape43.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>トランプのスーツ</td>
+                    <td><img src="shape44.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>電子ゲーム</td>
+                    <td><img src="shape45.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>標識</td>
+                    <td><img src="shape46.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>フラグ</td>
+                    <td><img src="shape47.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>ヘルメット</td>
+                    <td><img src="shape48.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+
+            <tr>
+                <td colspan="2" style="padding: 0;">
+                   <div class="section-title">その他シェイプ</div>
+                </td>
+            </tr>               
+                <tr>
+                    <td>野生動物</td>
+                    <td><img src="shape49.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>葉のある木</td>
+                    <td><img src="shape50.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>ボート</td>
+                    <td><img src="shape51.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                <tr>
+                    <td>花</td>
+                    <td><img src="shape51.png" alt="吹き出し" class="preview-img"></td>
+                </tr>
+                </tbody>
+        </table>
+
+        <br>
+           <tr>
+                <td colspan="2" style="padding: 0;">
+                   <div class="section-title">自作シェイプ作成方法</div>
+                </td>
+            </tr>
+            &emsp;&emsp;1.ペンツールでパスを作成<br>
+              &emsp;&emsp;*パスからシェイプに変更する必要があります<br>
+              <br>
+              &emsp;<div class="img-box">
+            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape53.png">
+            </div>
+              <br>
+              <br>
+            &emsp;&emsp;2.シェイプができたら「カスタムシェイプを定義」<br>
+            <br>
+            &emsp;<div class="img-box">
+            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape54.png">
+            </div>
+            <br>
+            &emsp;&emsp;以上で完成です。<br>
+            <br>
+            <br>
+           <tr>
+                <td colspan="2" style="padding: 0;">
+                   <div class="section-title">自作シェイプ作成方法2</div>
+                </td>
+            </tr>
+            &emsp;&emsp;1.画像を描きます<br>
+             <br>
+            &emsp;<div class="img-box">
+            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape58.png">
+            </div>
+            <br>
+            &emsp;&emsp;2.クイック選択ツールを選択して画像を選択します<br>
+            <br>
+            &emsp;<div class="img-box">
+            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape55.png">
+            </div>
+            <br>
+            <br>
+            &emsp;&emsp;3.画像が選択されている状態で右クリック<br>
+            &emsp;&emsp;&nbsp;&nbsp;「作業用パスを作成」を選択します<br>
+            <br>
+            &emsp;<div class="img-box">
+            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape56.png">
+            </div>
+            <br>
+            <br>
+            &emsp;&emsp;4.シェイプツールを選択して「カスタムシェイプを定義」<br>
+            <br>
+            &emsp;&emsp;以上で完成です。<br>
+            <br>
+            &emsp;<div class="img-box">
+            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape57.png">
+            </div>
+            <br>
+            &emsp;&emsp;シェイプ名を決めて保存してください。<br>
+            <br>
+            <br>
+    </div>
+
+</body>
+</html>
