@@ -150,10 +150,10 @@
             background: #000;
             color: #00f2fe;
             padding: 8px 15px;
-            margin: 15px 0 15px 0;
+            margin: 10px 0 15px 0;
             font-size: 14px;
             font-weight: bold;
-            border-left: 4px solid #00f2fe;
+            border-left: 4px solid #00a8ff;
             letter-spacing: 2px;
             box-shadow: inset 0 0 10px rgba(0, 242, 254, 0.2);
         }
@@ -166,7 +166,7 @@
             margin: 15px 0 -5px 0;
             font-size: 14px;
             font-weight: bold;
-            border-left: 4px solid #00f2fe;
+            border-left: 4px solid #00a8ff;
             letter-spacing: 2px;
             box-shadow: inset 0 0 10px rgba(0, 242, 254, 0.2);
         }
@@ -190,6 +190,110 @@
             height: auto;
         }
 
+          /* SAO風のコンテナ枠設定 */
+.sao-video-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6px; /* 内側の黒い隙間（SAOの二重枠っぽさ） */
+    background: rgba(0, 0, 0, 0.6); /* 半透明のダーク背景 */
+    border: 2px solid #ff7700; /* SAOといえば情熱的なオレンジ、またはサイバーな淡い光 */
+    box-shadow: 0 0 15px rgba(255, 119, 0, 0.4), inset 0 0 10px rgba(255, 119, 0, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+
+/* 四隅の近未来UI風コーナーデコレーション */
+.sao-corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 3px solid #ffffff; /* 輝く角のアクセント */
+    z-index: 10;
+}
+.sao-corner.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+.sao-corner.tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+.sao-corner.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+.sao-corner.br { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+/* 画面を走る、うっすらとしたゴールド・オレンジ風スキャンライン 
+.sao-scanline {
+    position: absolute;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+     
+    background: 
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+        linear-gradient(90deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.1), rgba(218, 165, 32, 0.2));
+    
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none;
+    
+    z-index: 20 !important; 
+    opacity: 0.6; 
+}*/
+
+/* ついでに画像がscanlineを隠さないようにタグを調整 */
+.sao-movie-content {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 1; /* scanlineより下にする */
+}
+
+
+/* 左上に浮かぶUI風のステータスタグ */
+.sao-tag {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    background: #ff7700;
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    z-index: 6;
+    box-shadow: 0 0 5px rgba(255, 119, 0, 0.8);
+}
+
+/* aタグ化しても崩れないようにするための魔法 */
+.sao-link-box {
+    display: block;        /* インライン要素をブロック化 */
+    text-decoration: none; /* 下線を消す */
+    color: inherit;        /* 色を継承 */
+    transition: transform 0.3s;
+}
+
+/*.sao-link-box:hover {
+    transform: scale(1.02); 
+    border-color: #ffaa00;  
+}*/
+
+/* 念のため画像もリンクに合わせて整理 */
+.sao-link-box .sao-movie-content {
+    pointer-events: none; /* クリック判定を親のaタグに任せる */
+}
+
+        /* 🌸 嫌味のないメッセージBOX */
+        .intro-box {
+            background: rgba(0, 0, 0, 0.4);            /* 薄い半透明の黒 */
+            border-left: 4px solid #00a8ff;             /* 左側にだけやさしい青いアクセント */
+            border-top: 1px solid rgba(0, 168, 255, 0.2);  /* うっすら細い枠線 */
+            border-right: 1px solid rgba(0, 168, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 168, 255, 0.2);
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin: 20px 0 20px 0;
+            line-height: 1.8;                           /* 文章が読みやすい行間 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
     </style>
 </head>
 <body>
@@ -207,302 +311,227 @@
 
     <div class="container">
 
+        <td colspan="2" style="padding: 0;">
+                   <div class="section-title">イラストが苦手でもAI生成画像をブラッシュアップできるマル秘テクニック</div>
+                </td>
+
+                <div class="intro-box">
+                イラストが苦手だからAIに任せるしかない……<br>
+                AIがどうしても直せない違和感がたくさんあるけど妥協するしかない……<br>
+                だって、私……<br>
+                だって、俺……絵が苦手なんだから……<br>
+                と、諦めていませんか？<br>
+                まあ、ぶっちゃけると絵に本当の完成ってないんですけどね。<br>
+                世の中の全てがそうです。<br>
+                ここが妥協点と言うと響きが悪いですので、ここがギリギリ満足点というところで一旦ストップして完成にするのが理想です。<br>
+                だって1ドットまで拘りつづけたらモナリザを作るレベルですよ。<br>
+                「それ、完成まで何年かかるの？」って感じですので、趣味の範囲なら満足点で完成。<br>
+                そう考えると「完璧にしなくて良いんだ～」と、まずは気持ちのハードルが一気に下がると思います。<br>
+                人の命を運ぶ自動車や飛行機、ロケットのパーツはコンマ1ミリの誤差も無いパーツを作らないといけないですけどね。<br>
+                でも、それにも本当の完成って無いんです。<br>
+                「完成って終わり」を意味しますからね。<br>
+                「終わり」と思った時点で発展は止まりますので、「完成」を追い求めれば終わりの無い旅なのですが……<br>
+                まあ、趣味レベルのイラストは旅に出て即Uターンしてお家に帰るがいいですね。<br>
+                満足点の絵を持ち帰れれば「レアアイテムゲット」でいう事無しです。<br>
+                <br>
+                と、いうことで、今回はこちらの絵をサクっとブラッシュアップするテクニックをご紹介いたします。<br>
+                </div>
+
+             <div class="img-box">
+            <img src="https://socrarius-tool.com/PhotoshopTechniques/sample1.jpg">
+            </div>
+
+                <div class="intro-box">
+                まずは最強の「のばしツール」で、気になる点をその周りの色を伸ばして伸ばして消して行きたいと思います。<br>
+                描かないです。色を伸ばすだけです。<br>
+                まあ、それも正確に言えば「描く」に分類されるのでしょうが……<br>
+                イラストの少年少女は絵具で絵を描いてますよね。<br>
+                絵具で絵を描くのって伸ばして色を塗り合わせるのがメイン作業ですよね。<br>
+                デシタルもそれと一緒です。<br>
+                AIがイラストを用意してくれているのですから、後は伸ばして違和感を消す！<br>
+                まあ、伸ばせば当然、線がぼけるのですが、そこは気にしない気にしない。<br>
+                どうせ、超絶アップ拡大しないと分からないんですし～。<br>
+                <br>
+                ということで、サクっと伸ばして違和感を修正しましょう<br>
+                女の子は良いですが……「後ろの男性も赤いリボン付けてるの何で？」<br>
+                「男性の右端にあるイラストボードは何？」<br>
+                と思いますので、そこを修正したいと思います。<br>
+                </div>
+
         <table>
             <thead>
                 <tr>
-                    <th style="width: 30%;">Shape Name</th>
-                    <th style="width: 70%;">Preview</th>
+                    <th style="width: 20%;">Techniques</th>
+                    <th style="width: 40%;">Explanation</th>
+                    <th style="width: 40%;">Image</th>
                 </tr>
             </thead>
 
-            <tbody>
-            <tr>
-                <td colspan="2" style="padding: 0;">
-                   <div class="section-title">従来のシェイプ</div>
-                </td>
-            </tr>               
+            <tbody>             
                 <tr>
-                    <td>デフォルトシェイプ</td>
-                    <td><img src="shape1.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>動物</td>
-                    <td><img src="shape2.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>矢印</td>
-                    <td><img src="shape3.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>アーティスティックテクスチャ</td>
-                    <td><img src="shape4.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>バナーと賞</td>
-                    <td><img src="shape5.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>フィルム</td>
-                    <td><img src="shape6.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>フレーム</td>
-                    <td><img src="shape7.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>液状のシミ</td>
-                    <td><img src="shape8.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>電球</td>
-                    <td><img src="shape9.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>音楽</td>
-                    <td><img src="shape10.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                 <tr>
-                    <td>自然</td>
-                    <td><img src="shape11.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>オブジェクト</td>
-                    <td><img src="shape12.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>装飾</td>
-                    <td><img src="shape13.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>図形</td>
-                    <td><img src="shape14.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                  <tr>
-                    <td>記号</td>
-                    <td><img src="shape15.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>吹き出し</td>
-                    <td><img src="shape16.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>タイルし</td>
-                    <td><img src="shape17.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>Web</td>
-                    <td><img src="shape18.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-
-            <tr>
-                <td colspan="2" style="padding: 0;">
-                   <div class="section-title">2019シェイプ</div>
-                </td>
-            </tr>
-
-                <tr>
-                    <td>針葉樹</td>
-                    <td><img src="shape19.png" alt="吹き出し" class="preview-img"></td>
-                </tr> 
-                <tr>
-                    <td>葉のない木</td>
-                    <td><img src="shape20.png" alt="吹き出し" class="preview-img"></td>
-                </tr> 
-                <tr>
-                    <td>森林と山</td>
-                    <td><img src="shape21.png" alt="吹き出し" class="preview-img"></td>
-                </tr> 
-                <tr>
-                    <td>湖と丘</td>
-                    <td><img src="shape22.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>葉</td>
-                    <td><img src="shape23.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>サボテン</td>
-                    <td><img src="shape24.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>道路と小川</td>
-                    <td><img src="shape25.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>スパイラル形状</td>
-                    <td><img src="shape26.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>人物</td>
-                    <td><img src="shape27.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>顔文字</td>
-                    <td><img src="shape28.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>ランドマーク</td>
-                    <td><img src="shape29.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>都市</td>
-                    <td><img src="shape30.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>建物</td>
-                    <td><img src="shape31.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>飛行機</td>
-                    <td><img src="shape32.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>車両1</td>
-                    <td><img src="shape33.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>車両2</td>
-                    <td><img src="shape34.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>家畜</td>
-                    <td><img src="shape35.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>水生動物</td>
-                    <td><img src="shape36.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>飛翔動物</td>
-                    <td><img src="shape37.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>昆虫とクモ類</td>
-                    <td><img src="shape38.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>両生類と爬虫類</td>
-                    <td><img src="shape39.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>海洋生物</td>
-                    <td><img src="shape40.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>恐竜</td>
-                    <td><img src="shape41.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>スポーツ用品</td>
-                    <td><img src="shape42.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>チェスとチェッカー</td>
-                    <td><img src="shape43.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>トランプのスーツ</td>
-                    <td><img src="shape44.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>電子ゲーム</td>
-                    <td><img src="shape45.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>標識</td>
-                    <td><img src="shape46.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>フラグ</td>
-                    <td><img src="shape47.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>ヘルメット</td>
-                    <td><img src="shape48.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-
-            <tr>
-                <td colspan="2" style="padding: 0;">
-                   <div class="section-title">その他シェイプ</div>
-                </td>
-            </tr>               
-                <tr>
-                    <td>野生動物</td>
-                    <td><img src="shape49.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>葉のある木</td>
-                    <td><img src="shape50.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>ボート</td>
-                    <td><img src="shape51.png" alt="吹き出し" class="preview-img"></td>
-                </tr>
-                <tr>
-                    <td>花</td>
-                    <td><img src="shape51.png" alt="吹き出し" class="preview-img"></td>
+                    <td>「のばしツール」で修正しちゃえ！</td>
+                    <td>のばし最強！<br>
+                        ドット絵はリアルもデジタルも同じ♪<br>
+                        筆で滲ませていけば違和感は消えます。<br>
+                        キャラクターのライン線もけっこう伸ばせます。<br>
+                        「伸ばせ。伸ばせ」です。<br>
+                        </td>
+                    <td><img src="https://socrarius-tool.com/PhotoshopTechniques/sample2.jpg" class="preview-img"></td>
                 </tr>
                 </tbody>
         </table>
 
-        <br>
-           <tr>
-                <td colspan="2" style="padding: 0;">
-                   <div class="section-title">自作シェイプ作成方法</div>
-                </td>
-            </tr>
-            &emsp;&emsp;1.ペンツールでパスを作成<br>
-              &emsp;&emsp;*パスからシェイプに変更する必要があります<br>
-              <br>
-              &emsp;<div class="img-box">
-            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape53.png">
+        <div class="img-box">
+            <img src="https://socrarius-tool.com/PhotoshopTechniques/sample3.jpg">
             </div>
-              <br>
-              <br>
-            &emsp;&emsp;2.シェイプができたら「カスタムシェイプを定義」<br>
-            <br>
-            &emsp;<div class="img-box">
-            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape54.png">
+
+             <div class="intro-box">
+                はい。綺麗に男性のリボンと額がなくなりました。<br>
+                メインじゃなくバックのキャラだからこれでいいでしょう……<br>
+                と言いたいですが、なんか背後霊みたいになってしまいましたね💧<br>
+                流石に可哀想なので修正しましょう。<br>
+                活躍するのはスポイトツールとペンツールです。<br>
+                ペンツールは「ペン」と言いながら「どんな線でも引ける線ツール」です。<br>
+                筆（ブラシツール）で頑張って絵を描く必要ありません。<br>
+                スポイトで男性のTシャツの色を吸い取って、ペンツールで線を引いて、後はまた伸ばすだけです。<br>
+                実際にやってみましょう。<br>
+                </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Techniques</th>
+                    <th style="width: 40%;">Explanation</th>
+                    <th style="width: 40%;">Image</th>
+                </tr>
+            </thead>
+            <tbody>             
+                <tr>
+                    <td>「スポイトツール」で色を抽出</td>
+                    <td>Windowsの「ペイント」にも搭載されている標準機能ですね。<br>
+                        「R255×G255×B255=16,581,375」色なんて選べるわけないんですよ。<br>
+                        だからスポイトで「シュ」が楽なんです。<br>
+                        </td>
+                    <td><img src="https://socrarius-tool.com/PhotoshopTechniques/sample4.jpg" class="preview-img"></td>
+                </tr>
+                </tbody>
+            <tbody>             
+                <tr>
+                    <td>「ペンツール」でなんとなく線を描きます</td>
+                    <td>元画像より1つ上にレイヤーを用意して、「こんな感じかな～」でラインを引　いたら「マウスを右クリック」で「パスの境界線を描く」を選択してください。<br>
+                        現在のブラシサイズと同じ太さの線が引かれますので、事前にブラシのサイズを1pxにしておいてくださいね。<br>
+                        ブラシ無しで絵を修正するならこれが基本ですので、ショートカットをFキーに割り当てておくと楽ですよ。<br>
+                        </td>
+                    <td><img src="https://socrarius-tool.com/PhotoshopTechniques/sample5.jpg" class="preview-img"></td>
+                </tr>
+                </tbody>
+        </table>
+
+        <div class="img-box">
+            <img src="https://socrarius-tool.com/PhotoshopTechniques/sample6.jpg">
             </div>
+
+            <div class="intro-box">
+                なんか、色々みたら「違うよ！」「コワイよ！」「そうはならないでしょ！」って言う場所が多々見つかってしまいましたので、ペンツールとのばしツールで全部直しました。<br>
+                はい。すみません。噓です。少年のインナーだけはブラシツールで色塗りました。<br>
+                でも他は「サッ」と1pxの線を引いて「伸ばして伸ばして色混ぜて～」で修正しています。<br>
+                「どこが変わったの？」と間違い探しをしてみてください。<br>
+                これでだいたい、満足点でしょうか？<br>
+                満足点は人それぞれですが、私はここまでいけばOKです。<br>
+                自分は慣れていますので10分で終わりました。<br>
+                コツを掴むとAIに頼むより速く作業が完了しますよ。<br>
+                使うツールはたったの3つ。<br>
+                苦手意識があった方も「これならできそう」と感じてくれたなら嬉しいです。<br>
+                軽い息抜きだと思って挑戦してみてくださいね。<br>
+                その他の、10秒でできるPhotoshop便利技もまとめておきました。<br>
+                </div>
+
+     <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Techniques</th>
+                    <th style="width: 40%;">Explanation</th>
+                    <th style="width: 40%;">Image</th>
+                </tr>
+            </thead>
+            <tbody>             
+                <tr>
+                    <td>シャープ（輪郭のみ）</td>
+                    <td>「フィルター」 → 「シャープ」 →　「シャープ（輪郭のみ）」を選択。<br>
+                        これを一回かければ「のばし」でぼけてしまった部分がだいたい綺麗になります。<br>
+                        「輪郭のみ」で上手くいかなければ普通に「シャープ」を一回かけてみてください。<br>
+                        肉眼では分かりずらいレベルで線が細くなるはずです。<br>
+                        何回もかけると絵が崩れるだけですので一回で充分ですよ。<br>
+                        </td>
+                    <td><img src="https://socrarius-tool.com/PhotoshopTechniques/sample7.jpg" class="preview-img"></td>
+                </tr>
+                </tbody>
+            <tbody>             
+                <tr>
+                    <td>自動トーン補正<br>
+                        自動コントラスト<br>
+                        自動カラー補正<br>
+                    </td>
+                    <td>自動で色のバランスを整え綺麗にしてくれる機能です。<br>
+                        Photoshopは元々写真編集ソフトですからね。<br>
+                        この手の機能はバッチリ備わっています。<br>
+                        イメージと違ければ「Ctrl+z」で戻せばいいだけですので、一回自動補正をかけてみると良いと思います。<br>
+                        5秒でできますので。<br>
+                        </td>
+                    <td><img src="https://socrarius-tool.com/PhotoshopTechniques/sample8.jpg" class="preview-img"></td>
+                </tr>
+                </tbody>
+            <tbody>             
+                <tr>
+                    <td>トーンカーブ<br>
+                    </td>
+                    <td>「イメージ」 → 「色調補正」 → 「トーンカーブ」 と選択します。<br>
+                        明るさや色合いを自由に調整できる機能です。<br>
+                        基本的にはちょっとだけカーブを動かすだけで充分です。<br>
+                        「明るい雰囲気にしたければ左上に、少し暗めな雰囲気にしたければ右下に」カーブ移動です。<br>
+                        AIって画像を大げさに描く癖がありますので、ほんの少し明るく調整すると綺麗に仕上がると思います。<br>
+                        </td>
+                    <td><img src="https://socrarius-tool.com/PhotoshopTechniques/sample9.jpg" class="preview-img"></td>
+                </tr>
+                </tbody>
+            <tbody>             
+                <tr>
+                    <td>AIアシスタントに「画像を綺麗にして」と頼む<br>
+                    </td>
+                    <td>
+                        「最後は人の手……」と矛盾しますが、自分で修正したイラストをAIに頼んで綺麗にしてもらいましょう。<br>
+                        フォトショ……等々「FireflyでAIアシストエディター」を搭載しちゃったんです💧<br>
+                        AIの発展スピードが速すぎてついていけないのですが、フォトショだけで理想のイラストは作成できると思います<br>
+                        </td>
+                    <td><img src="https://socrarius-tool.com/PhotoshopTechniques/sample10.jpg" class="preview-img"></td>
+                </tr>
+                </tbody>
+        </table>
+
+            <div class="intro-box">
+                以上が自分で絵を描かなくてもAIが作成したブラッシュアップさせる方法です。<br>
+                他にも色々ありますので、時間がある時にこの部屋の情報はアップデートさせようかと思います。<br>
+                まあ、ご自身にあった最善手を考えて実戦するのが一番なんですけどね。<br>
+                自分、イラスト好きなので情報は更新していきます。<br>
+                <br>
+                で……<br>
+                先程、満足点と言いつつ「もう少しだけ、もう少しだけ」とお話した機能だけで最後のブラッシュアップをしました。<br>
+                あはは……<br>
+                イラストはハマり出すと再現の無い沼ですので、本当に適度なところでUターンしてお家に帰りましょう<br>
+                今回の旅でゲットしたアイテムはこちらとなります。<br>
+                </div>
+
+                <div class="sao-video-container sao-link-box">       
+    <div class="sao-corner tl"></div>
+    <div class="sao-corner tr"></div>
+    <div class="sao-corner bl"></div>
+    <div class="sao-corner br"></div>
+    <!--<div class="sao-scanline"></div>-->
+    <img src="https://socrarius-tool.com/PhotoshopTechniques/sample11.jpg" class="sao-movie-content">  
+</div>
+        
             <br>
-            &emsp;&emsp;以上で完成です。<br>
             <br>
-            <br>
-           <tr>
-                <td colspan="2" style="padding: 0;">
-                   <div class="section-title">自作シェイプ作成方法2</div>
-                </td>
-            </tr>
-            &emsp;&emsp;1.画像を描きます<br>
-             <br>
-            &emsp;<div class="img-box">
-            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape58.png">
-            </div>
-            <br>
-            &emsp;&emsp;2.クイック選択ツールを選択して画像を選択します<br>
-            <br>
-            &emsp;<div class="img-box">
-            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape55.png">
-            </div>
-            <br>
-            <br>
-            &emsp;&emsp;3.画像が選択されている状態で右クリック<br>
-            &emsp;&emsp;&nbsp;&nbsp;「作業用パスを作成」を選択します<br>
-            <br>
-            &emsp;<div class="img-box">
-            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape56.png">
-            </div>
-            <br>
-            <br>
-            &emsp;&emsp;4.シェイプツールを選択して「カスタムシェイプを定義」<br>
-            <br>
-            &emsp;&emsp;以上で完成です。<br>
-            <br>
-            &emsp;<div class="img-box">
-            <img src="https://socrarius-tool.com/Listt_of_Photoshop_Shapes/shape57.png">
-            </div>
-            <br>
-            &emsp;&emsp;シェイプ名を決めて保存してください。<br>
             <br>
             <br>
     </div>
